@@ -71,6 +71,7 @@ public class biobuzzbetadrive extends LinearOpMode {
     private DcMotor rightFront = null;
     private DcMotor rightBack = null;
 
+
     @Override
     public void runOpMode() {
 
@@ -118,6 +119,7 @@ public class biobuzzbetadrive extends LinearOpMode {
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
+            double slowmode = gamepad1.right_bumper ? 0.5 : 1.0;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -157,10 +159,10 @@ public class biobuzzbetadrive extends LinearOpMode {
             */
 
             // Send calculated power to wheels
-            leftFront.setPower(frontLeftPower);
-            rightFront.setPower(frontRightPower);
-            leftBack.setPower(backLeftPower);
-            rightBack.setPower(backRightPower);
+            leftFront.setPower(frontLeftPower * slowmode);
+            rightFront.setPower(frontRightPower * slowmode);
+            leftBack.setPower(backLeftPower * slowmode);
+            rightBack.setPower(backRightPower * slowmode);
 
 
 
